@@ -1,0 +1,2 @@
+export const FETCH_STARSHIPS = 'FETCH_STARSHIPS';
+export const NEW_STARSHIP = 'NEW_STARSHIP';
