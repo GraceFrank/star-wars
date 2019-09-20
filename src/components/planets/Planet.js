@@ -5,7 +5,7 @@ import { assets } from '../../assets/assets';
 import { Row, Col, Image, Modal, Button } from 'react-bootstrap';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 
-class Character extends Component {
+class Planet extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,12 +14,10 @@ class Character extends Component {
     }
   }
 
-
   render() {
-    const image = assets.characters;
-    const modalCharacter = this.props.modalCharacter
+    const image = assets.planets;
+    const modalPlanet = this.props.modalPlanet
 
-    console.log(this.props.modalCharacter)
     return (
       <Modal
         show={this.props.show}
@@ -30,7 +28,7 @@ class Character extends Component {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            {modalCharacter.name}
+            {modalPlanet.name}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -38,66 +36,62 @@ class Character extends Component {
             <Image
               width={350}
               height={350}
-              src={require(`../../assets/${image[this.props.charIndex]}`)} />
+              src={require(`../../assets/${image[this.props.planetIndex]}`)} />
           </center>
 
           <Row className='mt-2 d-flex justify-content-center'>
             <Col lg={4}>
-              <h4>DOB<FaLongArrowAltRight></FaLongArrowAltRight></h4>
+              <h4>Climate <FaLongArrowAltRight></FaLongArrowAltRight></h4>
             </Col>
             <Col lg={4}>
-              <h4 className='text-danger'>{modalCharacter.birth_year}</h4>
+              <h4 className='text-danger'>{modalPlanet.climate}</h4>
             </Col>
           </Row>
 
           <Row className='mt-1 d-flex justify-content-center'>
             <Col lg={4}>
-              <h5>gender<FaLongArrowAltRight></FaLongArrowAltRight></h5>
+              <h5>Population<FaLongArrowAltRight></FaLongArrowAltRight></h5>
             </Col>
             <Col lg={4}>
-              <h5 className='text-danger'>{modalCharacter.gender}</h5>
+              <h5 className='text-danger'>{modalPlanet.population}</h5>
             </Col>
           </Row>
 
           <Row className='mt-1 d-flex justify-content-center'>
             <Col lg={4}>
-              <h5>height<FaLongArrowAltRight></FaLongArrowAltRight></h5>
+              <h5>terrain <FaLongArrowAltRight></FaLongArrowAltRight></h5>
             </Col>
             <Col lg={4}>
-              <h5 className='text-danger'>{modalCharacter.height}</h5>
+              <h5 className='text-danger'>{modalPlanet.terrain}</h5>
             </Col>
           </Row>
 
           <Row className='mt-1 d-flex justify-content-center'>
             <Col lg={4}>
-              <h5>hair<FaLongArrowAltRight></FaLongArrowAltRight></h5>
+              <h5>rotation<FaLongArrowAltRight></FaLongArrowAltRight></h5>
             </Col>
             <Col lg={4}>
-              <h5 className='text-danger'>{modalCharacter.hair_color}</h5>
+              <h5 className='text-danger'>{modalPlanet.rotation_period}</h5>
             </Col>
           </Row>
 
           <Row className='mt-1 d-flex justify-content-center'>
             <Col lg={4}>
-              <h5>eye<FaLongArrowAltRight></FaLongArrowAltRight></h5>
+              <h5>orbital<FaLongArrowAltRight></FaLongArrowAltRight></h5>
             </Col>
             <Col lg={4}>
-              <h5 className='text-danger'>{modalCharacter.eye_color}</h5>
+              <h5 className='text-danger'>{modalPlanet.orbital_period}</h5>
             </Col>
           </Row>
 
           <Row className='mt-1 d-flex justify-content-center'>
             <Col lg={4}>
-              <h5>mass<FaLongArrowAltRight></FaLongArrowAltRight></h5>
+              <h5>water<FaLongArrowAltRight></FaLongArrowAltRight></h5>
             </Col>
             <Col lg={4}>
-              <h5 className='text-danger'>{modalCharacter.mass}kg</h5>
+              <h5 className='text-danger'>{modalPlanet.surface_water}%</h5>
             </Col>
           </Row>
-
-
-
-
 
 
         </Modal.Body>
@@ -111,4 +105,4 @@ class Character extends Component {
 const mapStateToProps = state => ({
 
 });
-export default connect(mapStateToProps, {})(Character);
+export default connect(mapStateToProps, {})(Planet);

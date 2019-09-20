@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import axiosQueries from '../../queries/';
 import { connect } from 'react-redux';
+import Planet from './Planet'
+
 import { assets } from '../../assets/assets';
-
-//Modal to display full page of character
-import Character from './Character';
-
-import { Container, Row, Col, Image, Button, Spinner, } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Spinner } from 'react-bootstrap';
 import { FaLongArrowAltRight, FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 
-class Characters extends Component {
+class Planets extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      characters: [],
+      planets: [],
       next: null,
       prev: null,
       count: null,
@@ -23,30 +21,30 @@ class Characters extends Component {
       hidden: true,
       spinner: 'border',
       showModal: false,
-      modalCharacter: {},
-      charIndex: 0,
+      modalPlanet: {},
+      planetIndex: 0,
       pagingSpinner: 'none',
     }
   }
 
   async componentDidMount() {
 
-    const characters = await axiosQueries.Get(`people/`)
+    const planets = await axiosQueries.Get(`planets/`)
     this.setState({
-      characters: characters.data.results,
-      next: characters.data.next,
-      prev: characters.data.previous,
-      count: characters.data.count,
+      planets: planets.data.results,
+      next: planets.data.next,
+      prev: planets.data.previous,
+      count: planets.data.count,
       listStart: 1,
-      listEnd: characters.data.results.length,
+      listEnd: planets.data.results.length,
       hidden: false,
       spinner: 'none',
     });
   }
 
   async handlePrev() {
-    let { prev, count, listStart, listEnd, characters } = this.state;
-    listEnd = listEnd - characters.length;
+    let { prev, count, listStart, listEnd, planets } = this.state;
+    listEnd = listEnd - planets.length;
     if (listStart === 1) {
       return;
     }
@@ -57,13 +55,13 @@ class Characters extends Component {
 
     const pageCount = Math.floor(count / 10);
     await axiosQueries.Get(prev)
-      .then(characters => {
-        listStart = listStart - characters.data.results.length;
+      .then(planets => {
+        listStart = listStart - planets.data.results.length;
         this.setState({
-          characters: characters.data.results,
-          next: characters.data.next,
-          prev: characters.data.previous,
-          count: characters.data.count,
+          planets: planets.data.results,
+          next: planets.data.next,
+          prev: planets.data.previous,
+          count: planets.data.count,
           pageCount,
           listStart,
           listEnd,
@@ -76,8 +74,8 @@ class Characters extends Component {
   }
 
   async handleNext() {
-    let { next, count, listStart, listEnd, characters } = this.state;
-    listStart = listStart + characters.length
+    let { next, count, listStart, listEnd, planets } = this.state;
+    listStart = listStart + planets.length
     if (listEnd == count) {
       return;
     }
@@ -87,13 +85,13 @@ class Characters extends Component {
 
     const pageCount = Math.floor(count / 10);
     await axiosQueries.Get(next)
-      .then(characters => {
-        listEnd = listEnd + characters.data.results.length;
+      .then(planets => {
+        listEnd = listEnd + planets.data.results.length;
         this.setState({
-          characters: characters.data.results,
-          next: characters.data.next,
-          prev: characters.data.previous,
-          count: characters.data.count,
+          planets: planets.data.results,
+          next: planets.data.next,
+          prev: planets.data.previous,
+          count: planets.data.count,
           pageCount,
           listStart,
           listEnd,
@@ -104,11 +102,11 @@ class Characters extends Component {
   }
 
 
-  onShow = (character, index) => () => {
+  onShow = (planet, index) => () => {
 
     this.setState({
       showModal: true,
-      modalCharacter: character,
+      modalPlanet: planet,
       charIndex: index
     });
   }
@@ -117,55 +115,41 @@ class Characters extends Component {
     this.setState({ showModal: false });
   }
 
+  getPlanets() {
+    const image = assets.planets;
 
-  getCharacters() {
-    const image = assets.characters, MIN = 1;
-
-    //Math.floor(Math.random() * (max - min + 1)) + min
-
-    return this.state.characters.map((character, index) => {
-
+    return this.state.planets.map((planet, index) => {
       return (
-        <Col lg={6} className='py-3'>
-          <Row>
-            <Col lg={6} >
-              <Image
-                width={350}
-                height={350}
-                src={require(`../../assets/${image[index]}`)} />
-            </Col>
-            <Col lg={6} className='char-text'>
-              <p className='pt-4'>
-                <h1>{character.name}</h1>
-              </p>
-              <p>
-                <h3>{character.birth_year}</h3>
-              </p>
-              <p>
-                <h3>{character.gender}</h3>
-              </p>
-              <Button onClick={this.onShow(character, index)} className='char-btn'>
+        <Col className='my-4' key={index}>
+          <Card style={{ width: '18rem' }}>
+            <Card.Img className='imgee' variant="top" src={require(`../../assets/${image[index]}`)} />
+            <Card.Body>
+              <Card.Title>{planet.name}</Card.Title>
+              <Card.Text>
+                <p>Climate: {planet.climate}</p>
+                <p>Population: {planet.population}</p>
+              </Card.Text>
+              <Button onClick={this.onShow(planet, index)} className='card-btn'>
                 Read More
-                  <span className='ml-3'>
+                <span className='ml-3'>
                   <FaLongArrowAltRight />
                 </span>
               </Button>
-            </Col>
-          </Row>
-        </Col >
+            </Card.Body>
+          </Card>
+        </Col>
       )
     });
   }
 
 
-
   render() {
+
     return (
       <React.Fragment>
-
-        <Container fluid className=' px-5 pb-5 ' >
-          <Character show={this.state.showModal} charIndex={this.state.charIndex}
-            handleClose={this.handleClose()} modalCharacter={this.state.modalCharacter} />
+        <Container className=' py'>
+          <Planet show={this.state.showModal} planetIndex={this.state.planetIndex}
+            handleClose={this.handleClose()} modalPlanet={this.state.modalPlanet} />
 
           <Row className="pt-4 mb-5 ">
 
@@ -175,7 +159,7 @@ class Characters extends Component {
               </center>
               <Row className='mt-4 d-flex justify-content-center'>
                 <h1 className='ml-2 display-6 text-dark-50'>
-                  <strong>Starwars Characters</strong>
+                  <strong>Starwars Planets</strong>
                 </h1>
               </Row>
               <Row>
@@ -184,8 +168,11 @@ class Characters extends Component {
             </Col>
           </Row>
 
-          <Row className='px-5'>
-            {this.getCharacters()}
+          <Row>
+
+            {this.getPlanets()}
+
+
           </Row>
 
           <Row className='d-flex justify-content-center mt-3'>
@@ -195,7 +182,7 @@ class Characters extends Component {
               of ${this.state.count}`}
               </p>
             </Col>
-            <Col lg={1} hidden={this.state.hidden}>
+            <Col lg={2} hidden={this.state.hidden}>
               <Button onClick={this.handlePrev.bind(this)}  ><FaChevronLeft></FaChevronLeft> </Button>
               <Button onClick={this.handleNext.bind(this)}><FaChevronRight></FaChevronRight> </Button>
             </Col>
@@ -205,17 +192,14 @@ class Characters extends Component {
             </center>
 
           </Row>
-
-
         </Container>
 
-
       </React.Fragment>
+
     );
   }
 }
-
 const mapStateToProps = state => ({
-  starships: state.starships.items
+
 });
-export default connect(mapStateToProps, {})(Characters);
+export default connect(mapStateToProps, {})(Planets);

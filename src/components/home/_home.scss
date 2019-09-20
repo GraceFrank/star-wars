@@ -39,3 +39,13 @@
   background-color: $light-grey;
   border-top: 1px solid darken($color: $light-grey, $amount: 30%)
 }
+
+.link-style{
+  color: white;
+  text-decoration: underline;
+
+  a.link-style:hover {
+    color: red !important;
+
+  }
+}

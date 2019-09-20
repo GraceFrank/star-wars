@@ -34,6 +34,12 @@
   background-color: #c7c6c6;
   border-top: 1px solid #7b7979; }
 
+.link-style {
+  color: white;
+  text-decoration: underline; }
+  .link-style a.link-style:hover {
+    color: red !important; }
+
 .bg {
   background: url(./assets/hero-banner.jpg) center/cover no-repeat;
   height: 84vh; }

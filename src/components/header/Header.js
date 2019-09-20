@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import { Container, Row, Col, Image, InputGroup, FormControl } from 'react-bootstrap';
 import { FaSearch } from 'react-icons/fa';
@@ -21,7 +22,7 @@ class Header extends Component {
             </Col>
           </Row>
 
-          <Row className='pt-5'>
+          <Row className='pt-5 mb-5'>
             <Col>
               <Row className='mt-4 d-flex justify-content-center'>
                 <Image
@@ -60,6 +61,29 @@ class Header extends Component {
               </Row>
             </Col>
           </Row>
+
+          <Row className='mt-1 styletest'>
+            <ul>
+              <li>
+                <NavLink className="tags" activeStyle={{ color: 'red' }} to={`/`}>
+                  Characters
+              </NavLink>
+              </li>
+              <li>
+                <NavLink className="tags" activeStyle={{ color: 'red' }} to={`/starships`}>
+                  Starships
+              </NavLink>
+              </li>
+              <li>
+                <NavLink className="tags" activeStyle={{ color: 'red' }} to={`/planets`}>
+                  Planets
+              </NavLink>
+              </li>
+            </ul>
+          </Row>
+
+
+
         </Container>
 
       </React.Fragment>
