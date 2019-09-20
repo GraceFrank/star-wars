@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 //import axiosQueries from '../../queries/';
 import { connect } from 'react-redux';
 import { fetch_starships } from '../../redux/actions/starshipActions';
+import { assets } from '../../assets/assets';
+import PopularPlanets from '../pop-planet/Pop-Planet';
+import Characters from '../characters/Characters';
+import Header from '../header/Header';
+
+
 
 class Home extends Component {
   //async componentDidMount() {
@@ -18,12 +25,18 @@ class Home extends Component {
 
   }
 
+
   render() {
-    console.log(this.props.starships);
+
+    const image = assets.characters[0];
+    const image2 = assets.characters[1];
+
     return (
-      <div className="welcome">
-        <h1> Hi! Welcome to Star Wars</h1>
-      </div>
+      <React.Fragment>
+        <Header />
+        <Characters />
+      </React.Fragment>
+
     );
   }
 }

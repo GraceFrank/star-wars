@@ -1,0 +1,35 @@
+@import '../variables';
+
+.title-underline{
+  width: 320px;
+  height: 2px;
+  margin: 0 auto;
+}
+.search-icon{
+  color: $light-grey;
+  width: 100px;
+  padding-top: 8px;
+}
+
+.card-btn{
+  float: right;
+  background-color: lighten($light-grey, 20%) !important;
+  color: lighten( $dark, 30%) !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.char-btn{
+  float: right;
+  background-color: lighten($light-grey, 20%) !important;
+  color: lighten( $dark, 30%) !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+.char-text{
+  float: right;
+  background-color: lighten($light-grey, 20%) !important;
+  color: lighten( $dark, 30%) !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
