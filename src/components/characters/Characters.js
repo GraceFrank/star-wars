@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import propTypes from 'prop-types';
 import axiosQueries from '../../queries/';
 import { connect } from 'react-redux';
-import { fetch_starships } from '../../redux/actions/starshipActions';
 import { assets } from '../../assets/assets';
 
-import { Container, Row, Col, Image, Button } from 'react-bootstrap';
+//Modal to display full page of character
+import Character from './Character';
+
+import { Container, Row, Col, Image, Button, Spinner, } from 'react-bootstrap';
 import { FaLongArrowAltRight, FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 
 class Characters extends Component {
@@ -20,7 +21,10 @@ class Characters extends Component {
       listStart: null,
       listEnd: null,
       hidden: true,
-
+      spinner: 'border',
+      showModal: false,
+      modalCharacter: {},
+      charIndex: 0,
     }
   }
 
@@ -35,14 +39,8 @@ class Characters extends Component {
       listStart: 1,
       listEnd: characters.data.results.length,
       hidden: false,
+      spinner: 'none',
     });
-    console.log(characters);
-    console.log(this.state.characters);
-    console.log(this.state.next);
-    console.log(this.state.prev);
-    console.log(this.state.count);
-
-    this.props.fetch_starships();
   }
 
   async handlePrev() {
@@ -51,6 +49,10 @@ class Characters extends Component {
     if (listStart === 1) {
       return;
     }
+
+    this.setState({
+      spinner: 'border',
+    })
 
     const pageCount = Math.floor(count / 10);
     await axiosQueries.Get(prev)
@@ -64,9 +66,11 @@ class Characters extends Component {
           pageCount,
           listStart,
           listEnd,
+          spinner: 'none',
 
         });
       })
+
   }
 
   async handleNext() {
@@ -75,6 +79,10 @@ class Characters extends Component {
     if (listEnd == count) {
       return;
     }
+    this.setState({
+      spinner: 'border',
+    })
+
     const pageCount = Math.floor(count / 10);
     await axiosQueries.Get(next)
       .then(characters => {
@@ -87,16 +95,33 @@ class Characters extends Component {
           pageCount,
           listStart,
           listEnd,
+          spinner: 'none',
         });
       })
   }
 
+
+  onShow = (character, index) => () => {
+
+    this.setState({
+      showModal: true,
+      modalCharacter: character,
+      charIndex: index
+    });
+  }
+
+  handleClose = () => () => {
+    this.setState({ showModal: false });
+  }
+
+
   getCharacters() {
-    const images = assets.characters, MIN = 1;
+    const image = assets.characters, MIN = 1;
 
     //Math.floor(Math.random() * (max - min + 1)) + min
 
     return this.state.characters.map((character, index) => {
+
       return (
         <Col lg={6} className='py-3'>
           <Row>
@@ -104,7 +129,7 @@ class Characters extends Component {
               <Image
                 width={350}
                 height={350}
-                src={require(`../../assets/${images[index]}`)} />
+                src={require(`../../assets/${image[index]}`)} />
             </Col>
             <Col lg={6} className='char-text'>
               <p className='pt-4'>
@@ -116,7 +141,7 @@ class Characters extends Component {
               <p>
                 <h3>{character.gender}</h3>
               </p>
-              <Button className='char-btn'>
+              <Button onClick={this.onShow(character, index)} className='char-btn'>
                 Read More
                   <span className='ml-3'>
                   <FaLongArrowAltRight />
@@ -129,12 +154,22 @@ class Characters extends Component {
     });
   }
 
+
+
   render() {
     return (
       <React.Fragment>
+
         <Container fluid className=' px-5 pb-5 ' >
+          <Character show={this.state.showModal} charIndex={this.state.charIndex}
+            handleClose={this.handleClose()} modalCharacter={this.state.modalCharacter} />
+
           <Row className="pt-4 mb-5 ">
+
             <Col>
+              <center>
+                <Spinner size={100} animation={this.state.spinner} variant="success" />
+              </center>
               <Row className='mt-4 d-flex justify-content-center'>
                 <h1 className='ml-2 display-6 text-dark-50'>
                   <strong>Starwars Characters</strong>
@@ -162,7 +197,13 @@ class Characters extends Component {
               <Button onClick={this.handleNext.bind(this)}><FaChevronRight></FaChevronRight> </Button>
             </Col>
 
+            <center>
+              <Spinner size={100} animation={this.state.spinner} variant="danger" />
+            </center>
+
           </Row>
+
+
         </Container>
 
 
@@ -174,4 +215,4 @@ class Characters extends Component {
 const mapStateToProps = state => ({
   starships: state.starships.items
 });
-export default connect(mapStateToProps, { fetch_starships })(Characters);
+export default connect(mapStateToProps, {})(Characters);

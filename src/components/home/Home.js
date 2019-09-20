@@ -3,10 +3,9 @@ import propTypes from 'prop-types';
 //import axiosQueries from '../../queries/';
 import { connect } from 'react-redux';
 import { fetch_starships } from '../../redux/actions/starshipActions';
-import { assets } from '../../assets/assets';
-import PopularPlanets from '../pop-planet/Pop-Planet';
 import Characters from '../characters/Characters';
 import Header from '../header/Header';
+import Footer from '../footer/Footer';
 
 
 
@@ -25,16 +24,13 @@ class Home extends Component {
 
   }
 
-
   render() {
-
-    const image = assets.characters[0];
-    const image2 = assets.characters[1];
 
     return (
       <React.Fragment>
         <Header />
         <Characters />
+        <Footer />
       </React.Fragment>
 
     );

@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
-import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetch_starships } from '../../redux/actions/starshipActions';
 import { assets } from '../../assets/assets';
-
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 
 class PopularPlanets extends Component {
 
-  componentDidMount() {
-    this.props.fetch_starships();
-  }
 
   render() {
 
-    const image = assets.characters[0];
 
     return (
       <React.Fragment>
@@ -49,6 +42,6 @@ class PopularPlanets extends Component {
   }
 }
 const mapStateToProps = state => ({
-  starships: state.starships.items
+
 });
-export default connect(mapStateToProps, { fetch_starships })(PopularPlanets);
+export default connect(mapStateToProps, {})(PopularPlanets);
