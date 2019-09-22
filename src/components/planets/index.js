@@ -1,27 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Header from '../header/Header';
+import PropTypes from 'prop-types';
+import { fetch_planets } from '../../redux/actions';
+import Header from '../headers/PlanetsHeader';
 import Footer from '../footer/Footer';
 import Planets from '../planets/Planets';
 
-import { Container, Row, Col, Image, InputGroup, FormControl } from 'react-bootstrap';
-import { FaSearch } from 'react-icons/fa';
-
 class Index extends Component {
+  componentDidMount() {
+    this.props.fetch_planets();
+  }
 
   render() {
-
     return (
       <React.Fragment>
         <Header />
-        <Planets />
+        <Planets planets={this.props.planets} />
         <Footer />
       </React.Fragment>
 
     );
   }
 }
-const mapStateToProps = state => ({
 
+Index.propTypes = {
+  fetch_planets: PropTypes.func.isRequired,
+}
+const mapStateToProps = state => ({
+  planets: state.planets.items,
 });
-export default connect(mapStateToProps, {})(Index);
+export default connect(mapStateToProps, { fetch_planets })(Index);

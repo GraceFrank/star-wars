@@ -1,42 +1,41 @@
 import React, { Component } from 'react';
-import propTypes from 'prop-types';
-//import axiosQueries from '../../queries/';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetch_starships } from '../../redux/actions/starshipActions';
+import { fetch_characters } from '../../redux/actions/';
 import Characters from '../characters/Characters';
-import Header from '../header/Header';
+import Header from '../headers/Header';
 import Footer from '../footer/Footer';
 
-
-
 class Home extends Component {
-  //async componentDidMount() {
-  // fetch('https://swapi.co/api/people/1')
-  //   .then(res => res.json())
-  //   .then(data => console.log(data))
+  constructor(props) {
+    super(props);
+    this.state = {
 
-  // let stars = await axiosQueries.Get('people/')
-  // console.log(stars.data);
-  //}
+    }
+  }
 
   componentDidMount() {
-    this.props.fetch_starships();
+    this.props.fetch_characters();
 
   }
 
   render() {
-
     return (
       <React.Fragment>
         <Header />
-        <Characters />
+        <Characters characters={this.props.characters} />
         <Footer />
       </React.Fragment>
 
     );
   }
 }
+
+Home.propTypes = {
+  fetch_characters: PropTypes.func.isRequired,
+}
+
 const mapStateToProps = state => ({
-  starships: state.starships.items
+  characters: state.characters.items,
 });
-export default connect(mapStateToProps, { fetch_starships })(Home);
+export default connect(mapStateToProps, { fetch_characters, })(Home);

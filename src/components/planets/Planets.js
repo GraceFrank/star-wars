@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axiosQueries from '../../queries/';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Planet from './Planet'
 
@@ -27,9 +28,8 @@ class Planets extends Component {
     }
   }
 
-  async componentDidMount() {
-
-    const planets = await axiosQueries.Get(`planets/`)
+  UNSAFE_componentWillReceiveProps(props) {
+    const planets = props.planets
     this.setState({
       planets: planets.data.results,
       next: planets.data.next,
@@ -70,13 +70,12 @@ class Planets extends Component {
 
         });
       })
-
   }
 
   async handleNext() {
     let { next, count, listStart, listEnd, planets } = this.state;
     listStart = listStart + planets.length
-    if (listEnd == count) {
+    if (listEnd === count) {
       return;
     }
     this.setState({
@@ -101,9 +100,7 @@ class Planets extends Component {
       })
   }
 
-
   onShow = (planet, index) => () => {
-
     this.setState({
       showModal: true,
       modalPlanet: planet,
@@ -126,8 +123,8 @@ class Planets extends Component {
             <Card.Body>
               <Card.Title>{planet.name}</Card.Title>
               <Card.Text>
-                <p>Climate: {planet.climate}</p>
-                <p>Population: {planet.population}</p>
+                Climate: {planet.climate}
+                Population: {planet.population}
               </Card.Text>
               <Button onClick={this.onShow(planet, index)} className='card-btn'>
                 Read More
@@ -141,7 +138,6 @@ class Planets extends Component {
       )
     });
   }
-
 
   render() {
 
@@ -198,6 +194,10 @@ class Planets extends Component {
 
     );
   }
+}
+
+Planets.propTypes = {
+  planets: PropTypes.object.isRequired,
 }
 const mapStateToProps = state => ({
 

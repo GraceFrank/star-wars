@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types'
 import { assets } from '../../assets/assets';
 
 import { Row, Col, Image, Modal, Button } from 'react-bootstrap';
@@ -10,16 +11,12 @@ class Character extends Component {
     super(props);
     this.state = {
 
-
     }
   }
-
 
   render() {
     const image = assets.characters;
     const modalCharacter = this.props.modalCharacter
-
-    console.log(this.props.modalCharacter)
     return (
       <Modal
         show={this.props.show}
@@ -28,11 +25,13 @@ class Character extends Component {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
+
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             {modalCharacter.name}
           </Modal.Title>
         </Modal.Header>
+
         <Modal.Body>
           <center>
             <Image
@@ -94,19 +93,21 @@ class Character extends Component {
               <h5 className='text-danger'>{modalCharacter.mass}kg</h5>
             </Col>
           </Row>
-
-
-
-
-
-
         </Modal.Body>
+
         <Modal.Footer>
           <Button onClick={this.props.handleClose}>Close</Button>
         </Modal.Footer>
+
       </Modal>
     );
   }
+}
+Character.propTypes = {
+  show: PropTypes.bool.isRequired,
+  charIndex: PropTypes.number.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  modalCharacter: PropTypes.object.isRequired
 }
 const mapStateToProps = state => ({
 

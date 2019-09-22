@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import axiosQueries from '../../queries/';
 import { connect } from 'react-redux';
 import { assets } from '../../assets/assets';
@@ -26,12 +27,13 @@ class Characters extends Component {
       modalCharacter: {},
       charIndex: 0,
       pagingSpinner: 'none',
+      grading: []
     }
   }
 
-  async componentDidMount() {
+  UNSAFE_componentWillReceiveProps(props) {
 
-    const characters = await axiosQueries.Get(`people/`)
+    const characters = props.characters;
     this.setState({
       characters: characters.data.results,
       next: characters.data.next,
@@ -42,6 +44,7 @@ class Characters extends Component {
       hidden: false,
       spinner: 'none',
     });
+
   }
 
   async handlePrev() {
@@ -69,16 +72,14 @@ class Characters extends Component {
           listEnd,
           spinner: 'none',
           pagingSpinner: 'none'
-
         });
       })
-
   }
 
   async handleNext() {
     let { next, count, listStart, listEnd, characters } = this.state;
     listStart = listStart + characters.length
-    if (listEnd == count) {
+    if (listEnd === count) {
       return;
     }
     this.setState({
@@ -103,9 +104,7 @@ class Characters extends Component {
       })
   }
 
-
   onShow = (character, index) => () => {
-
     this.setState({
       showModal: true,
       modalCharacter: character,
@@ -119,14 +118,14 @@ class Characters extends Component {
 
 
   getCharacters() {
-    const image = assets.characters, MIN = 1;
+    const image = assets.characters;
 
     //Math.floor(Math.random() * (max - min + 1)) + min
 
     return this.state.characters.map((character, index) => {
 
       return (
-        <Col lg={6} className='py-3'>
+        <Col lg={6} className='py-3' key={index}>
           <Row>
             <Col lg={6} >
               <Image
@@ -135,15 +134,9 @@ class Characters extends Component {
                 src={require(`../../assets/${image[index]}`)} />
             </Col>
             <Col lg={6} className='char-text'>
-              <p className='pt-4'>
-                <h1>{character.name}</h1>
-              </p>
-              <p>
-                <h3>{character.birth_year}</h3>
-              </p>
-              <p>
-                <h3>{character.gender}</h3>
-              </p>
+              <h1 className='pt-4'>{character.name}</h1>
+              <h3>{character.birth_year}</h3>
+              <h3>{character.gender}</h3>
               <Button onClick={this.onShow(character, index)} className='char-btn'>
                 Read More
                   <span className='ml-3'>
@@ -157,18 +150,14 @@ class Characters extends Component {
     });
   }
 
-
-
   render() {
     return (
       <React.Fragment>
-
         <Container fluid className=' px-5 pb-5 ' >
           <Character show={this.state.showModal} charIndex={this.state.charIndex}
             handleClose={this.handleClose()} modalCharacter={this.state.modalCharacter} />
 
           <Row className="pt-4 mb-5 ">
-
             <Col>
               <center>
                 <Spinner size={100} animation={this.state.spinner} variant="success" />
@@ -203,19 +192,18 @@ class Characters extends Component {
             <center>
               <Spinner size={100} animation={this.state.pagingSpinner} variant="danger" />
             </center>
-
           </Row>
-
-
         </Container>
-
-
       </React.Fragment>
     );
   }
 }
 
+Characters.propTypes = {
+  characters: PropTypes.object.isRequired,
+}
+
 const mapStateToProps = state => ({
-  starships: state.starships.items
+
 });
 export default connect(mapStateToProps, {})(Characters);

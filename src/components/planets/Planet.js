@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { assets } from '../../assets/assets';
+import PropTypes from 'prop-types';
 
 import { Row, Col, Image, Modal, Button } from 'react-bootstrap';
 import { FaLongArrowAltRight } from 'react-icons/fa';
@@ -9,7 +10,6 @@ class Planet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
 
     }
   }
@@ -93,7 +93,6 @@ class Planet extends Component {
             </Col>
           </Row>
 
-
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.props.handleClose}>Close</Button>
@@ -101,6 +100,13 @@ class Planet extends Component {
       </Modal>
     );
   }
+}
+
+Planet.propTypes = {
+  show: PropTypes.bool.isRequired,
+  planetIndex: PropTypes.number.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  modalPlanet: PropTypes.object.isRequired
 }
 const mapStateToProps = state => ({
 

@@ -43,3 +43,11 @@
 .bg {
   background: url(./assets/hero-banner.jpg) center/cover no-repeat;
   height: 84vh; }
+
+.starships-header {
+  background: url(./assets/starship-1.jpg) center/cover no-repeat;
+  height: 84vh; }
+
+.planets-header {
+  background: url(./assets/planet-1.jpg) center/cover no-repeat;
+  height: 84vh; }

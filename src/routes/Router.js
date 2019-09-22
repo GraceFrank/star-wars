@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import App from '../App';
 import ErrorPage from '../components/ErrorPage'
 import Planets from '../components/planets/';
-import Starships from '../components/starships/';
+import Starships from '../components/starships/index';
 
 const Router = () => {
   return (

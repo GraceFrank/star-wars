@@ -1,17 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import { search_planet } from '../../redux/actions';
 
 import { Container, Row, Col, Image, InputGroup, FormControl } from 'react-bootstrap';
 import { FaSearch } from 'react-icons/fa';
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchInput: '',
+    }
+  }
+
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+    this.props.search_planet(e.target.value);
+  }
+
+  handleSearch(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const searchData = this.state.searchInput;
+      this.props.search_planet(searchData);
+    }
+  }
 
   render() {
 
     return (
       <React.Fragment>
-        <Container fluid className='bg text-light'>
+        <Container fluid className='planets-header text-light'>
           <Row className='mb-5'>
             <Col className='mt-5'>
               <Image
@@ -54,6 +75,9 @@ class Header extends Component {
                     </InputGroup.Prepend>
                     <FormControl
                       placeholder="Enter Search Item"
+                      name="searchInput"
+                      onChange={this.handleChange.bind(this)}
+                      onKeyDown={this.handleSearch.bind(this)}
                     />
 
                   </InputGroup>
@@ -91,7 +115,11 @@ class Header extends Component {
     );
   }
 }
+
+Header.propTypes = {
+  search_planet: PropTypes.func.isRequired
+}
 const mapStateToProps = state => ({
 
 });
-export default connect(mapStateToProps, {})(Header);
+export default connect(mapStateToProps, { search_planet })(Header);

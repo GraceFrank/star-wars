@@ -1,6 +1,11 @@
 import { combineReducers } from 'redux';
-import starshipReducer from './starshipReducer';
+
+import charactersReducer from './charactersReducer';
+import starshipsReducer from './starshipsReducer';
+import planetsReducer from './planetsReducer';
 
 export default combineReducers({
-  starships: starshipReducer,
+  characters: charactersReducer,
+  starships: starshipsReducer,
+  planets: planetsReducer,
 });
