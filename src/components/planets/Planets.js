@@ -168,7 +168,6 @@ class Planets extends Component {
 
             {this.getPlanets()}
 
-
           </Row>
 
           <Row className='d-flex justify-content-center mt-3'>

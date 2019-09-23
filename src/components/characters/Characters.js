@@ -7,7 +7,7 @@ import { assets } from '../../assets/assets';
 //Modal to display full page of character
 import Character from './Character';
 
-import { Container, Row, Col, Image, Button, Spinner, } from 'react-bootstrap';
+import { Container, Row, Col, Image, Button, Spinner, Dropdown } from 'react-bootstrap';
 import { FaLongArrowAltRight, FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 
 class Characters extends Component {
@@ -15,6 +15,7 @@ class Characters extends Component {
     super(props);
     this.state = {
       characters: [],
+      newCharacters: [],
       next: null,
       prev: null,
       count: null,
@@ -27,7 +28,6 @@ class Characters extends Component {
       modalCharacter: {},
       charIndex: 0,
       pagingSpinner: 'none',
-      grading: []
     }
   }
 
@@ -36,6 +36,7 @@ class Characters extends Component {
     const characters = props.characters;
     this.setState({
       characters: characters.data.results,
+      newCharacters: characters.data.results,
       next: characters.data.next,
       prev: characters.data.previous,
       count: characters.data.count,
@@ -116,14 +117,45 @@ class Characters extends Component {
     this.setState({ showModal: false });
   }
 
+  handleFilterAll() {
+    const { newCharacters } = this.state;
+    this.setState({
+      characters: newCharacters,
+    })
+  }
+
+  handleFilterFemale() {
+    const { newCharacters } = this.state;
+    let characters = [];
+    newCharacters.find(char => {
+      if (char.gender === "female") {
+        characters.push(char);
+      }
+      return null;
+    })
+    this.setState({
+      characters
+    })
+  }
+
+  handleFilterMale() {
+    const { newCharacters } = this.state;
+    let characters = [];
+    newCharacters.find(char => {
+      if (char.gender === "male") {
+        characters.push(char);
+      }
+      return null;
+    })
+    this.setState({
+      characters
+    })
+  }
 
   getCharacters() {
-    const image = assets.characters;
-
-    //Math.floor(Math.random() * (max - min + 1)) + min
+    const image = assets.characters, min = 0;
 
     return this.state.characters.map((character, index) => {
-
       return (
         <Col lg={6} className='py-3' key={index}>
           <Row>
@@ -131,7 +163,7 @@ class Characters extends Component {
               <Image
                 width={350}
                 height={350}
-                src={require(`../../assets/${image[index]}`)} />
+                src={require(`../../assets/${image[Math.floor(Math.random() * (index - min + 1)) + min]}`)} />
             </Col>
             <Col lg={6} className='char-text'>
               <h1 className='pt-4'>{character.name}</h1>
@@ -167,12 +199,24 @@ class Characters extends Component {
                   <strong>Starwars Characters</strong>
                 </h1>
               </Row>
+
               <Row>
                 <div className='bg-dark title-underline'></div>
               </Row>
             </Col>
           </Row>
-
+          <Row className='pl-5'>
+            <Dropdown className='ml-3'>
+              <Dropdown.Toggle variant="primary" id="dropdown-outline">
+                FILTER
+                <Dropdown.Menu>
+                  <Dropdown.Item onSelect={this.handleFilterAll.bind(this)}>All</Dropdown.Item>
+                  <Dropdown.Item onSelect={this.handleFilterFemale.bind(this)}>Female</Dropdown.Item>
+                  <Dropdown.Item onSelect={this.handleFilterMale.bind(this)}>Male</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown.Toggle>
+            </Dropdown>
+          </Row>
           <Row className='px-5'>
             {this.getCharacters()}
           </Row>

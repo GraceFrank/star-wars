@@ -3,14 +3,68 @@
 .bg{
   background: url(./assets/hero-banner.jpg) center/cover no-repeat;
   height: 84vh;
+
+  ul{
+    margin-top: 40px;
+    margin-right: 50px;
+  }
+
+  ul li{
+    list-style: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding:2px;
+    text-decoration: underline;
+
+
+    .tags{
+      color:white;
+    }
+  }
 }
 
 .starships-header{
-  background: url(./assets/starship-1.jpg) center/cover no-repeat;
+  background: url(./assets/starship-3.jpg) center/cover no-repeat;
   height: 84vh;
+
+  ul{
+    margin-top: 40px;
+    margin-right: 50px;
+  }
+
+  ul li{
+    list-style: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding:2px;
+    text-decoration: underline;
+
+
+    .tags{
+      color:white;
+    }
+  }
 }
 
 .planets-header{
-  background: url(./assets/planet-1.jpg) center/cover no-repeat;
+  background: url(./assets/planet-3.jpg) center/cover no-repeat;
   height: 84vh;
+
+  ul{
+    margin-top: 40px;
+    margin-right: 50px;
+  }
+
+  ul li{
+    list-style: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding:2px;
+    text-decoration: underline;
+
+
+    .tags{
+      color:white;
+    }
+  }
 }

@@ -43,11 +43,44 @@
 .bg {
   background: url(./assets/hero-banner.jpg) center/cover no-repeat;
   height: 84vh; }
+  .bg ul {
+    margin-top: 40px;
+    margin-right: 50px; }
+  .bg ul li {
+    list-style: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 2px;
+    text-decoration: underline; }
+    .bg ul li .tags {
+      color: white; }
 
 .starships-header {
-  background: url(./assets/starship-1.jpg) center/cover no-repeat;
+  background: url(./assets/starship-3.jpg) center/cover no-repeat;
   height: 84vh; }
+  .starships-header ul {
+    margin-top: 40px;
+    margin-right: 50px; }
+  .starships-header ul li {
+    list-style: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 2px;
+    text-decoration: underline; }
+    .starships-header ul li .tags {
+      color: white; }
 
 .planets-header {
-  background: url(./assets/planet-1.jpg) center/cover no-repeat;
+  background: url(./assets/planet-3.jpg) center/cover no-repeat;
   height: 84vh; }
+  .planets-header ul {
+    margin-top: 40px;
+    margin-right: 50px; }
+  .planets-header ul li {
+    list-style: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 2px;
+    text-decoration: underline; }
+    .planets-header ul li .tags {
+      color: white; }

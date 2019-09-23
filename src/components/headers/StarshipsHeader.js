@@ -41,6 +41,27 @@ class Header extends Component {
                 className='ml-4 mt-4'
                 src={require("../../assets/logo.png")} />
             </Col>
+            <Col className='mt-5 pr-5 styletest'>
+              <ul className="d-flex justify-content-end">
+                <li>
+                  <NavLink className="tags" activeStyle={{ color: 'none' }} to={`/`}>
+                    Characters >>
+              </NavLink>
+
+                </li>
+                <li>
+                  <NavLink className="tags" activeStyle={{ color: 'none' }} to={`/starships`}>
+                    Starships >>
+              </NavLink>
+
+                </li>
+                <li>
+                  <NavLink className="tags" activeStyle={{ color: 'none' }} to={`/planets`}>
+                    Planets >>
+              </NavLink>
+                </li>
+              </ul>
+            </Col>
           </Row>
 
           <Row className='pt-5 mb-5'>
@@ -85,29 +106,6 @@ class Header extends Component {
               </Row>
             </Col>
           </Row>
-
-          <Row className='mt-1 styletest'>
-            <ul>
-              <li>
-                <NavLink className="tags" activeStyle={{ color: 'red' }} to={`/`}>
-                  Characters
-              </NavLink>
-              </li>
-              <li>
-                <NavLink className="tags" activeStyle={{ color: 'red' }} to={`/starships`}>
-                  Starships
-              </NavLink>
-              </li>
-              <li>
-                <NavLink className="tags" activeStyle={{ color: 'red' }} to={`/planets`}>
-                  Planets
-              </NavLink>
-              </li>
-            </ul>
-          </Row>
-
-
-
         </Container>
 
       </React.Fragment>
