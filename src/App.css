@@ -1,33 +1,86 @@
-.App {
-  text-align: center;
-}
+.title-underline {
+  width: 320px;
+  height: 2px;
+  margin: 0 auto; }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
+.search-icon {
+  color: #c7c6c6;
+  width: 100px;
+  padding-top: 8px; }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.card-btn {
+  float: right;
+  background-color: #faf9f9 !important;
+  color: #4d4d4d !important;
+  border: none !important;
+  border-radius: 0 !important; }
+
+.char-btn {
+  float: right;
+  background-color: #faf9f9 !important;
+  color: #4d4d4d !important;
+  border: none !important;
+  border-radius: 0 !important; }
+
+.char-text {
+  float: right;
+  background-color: #faf9f9 !important;
+  color: #4d4d4d !important;
+  border: none !important;
+  border-radius: 0 !important; }
+
+.footer {
+  height: 12vh;
+  background-color: #c7c6c6;
+  border-top: 1px solid #7b7979; }
+
+.link-style {
   color: white;
-}
+  text-decoration: underline; }
+  .link-style a.link-style:hover {
+    color: red !important; }
 
-.App-link {
-  color: #61dafb;
-}
+.bg {
+  background: url(./assets/hero-banner.jpg) center/cover no-repeat;
+  height: 84vh; }
+  .bg ul {
+    margin-top: 40px;
+    margin-right: 50px; }
+  .bg ul li {
+    list-style: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 2px;
+    text-decoration: underline; }
+    .bg ul li .tags {
+      color: white; }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+.starships-header {
+  background: url(./assets/starship-3.jpg) center/cover no-repeat;
+  height: 84vh; }
+  .starships-header ul {
+    margin-top: 40px;
+    margin-right: 50px; }
+  .starships-header ul li {
+    list-style: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 2px;
+    text-decoration: underline; }
+    .starships-header ul li .tags {
+      color: white; }
+
+.planets-header {
+  background: url(./assets/planet-3.jpg) center/cover no-repeat;
+  height: 84vh; }
+  .planets-header ul {
+    margin-top: 40px;
+    margin-right: 50px; }
+  .planets-header ul li {
+    list-style: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 2px;
+    text-decoration: underline; }
+    .planets-header ul li .tags {
+      color: white; }

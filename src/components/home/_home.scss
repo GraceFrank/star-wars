@@ -1,0 +1,51 @@
+@import '../variables';
+
+.title-underline{
+  width: 320px;
+  height: 2px;
+  margin: 0 auto;
+}
+.search-icon{
+  color: $light-grey;
+  width: 100px;
+  padding-top: 8px;
+}
+
+.card-btn{
+  float: right;
+  background-color: lighten($light-grey, 20%) !important;
+  color: lighten( $dark, 30%) !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.char-btn{
+  float: right;
+  background-color: lighten($light-grey, 20%) !important;
+  color: lighten( $dark, 30%) !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+.char-text{
+  float: right;
+  background-color: lighten($light-grey, 20%) !important;
+  color: lighten( $dark, 30%) !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.footer{
+  height: 12vh;
+  background-color: $light-grey;
+  border-top: 1px solid darken($color: $light-grey, $amount: 30%)
+}
+
+.link-style{
+  color: white;
+  text-decoration: underline;
+
+  a.link-style:hover {
+    color: red !important;
+
+  }
+}
